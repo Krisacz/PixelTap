@@ -7,17 +7,18 @@ namespace Assets.Scripts.Models
         internal int Value;
         internal int Min;
         internal int Max;
-        private readonly string _tag;
+        internal readonly string Tag;
 
         protected Stat(int value, int min, int max, string tag)
         {
             Value = value;
             Min = min;
             Max = max;
-            _tag = tag;
+            Tag = tag;
         }
 
         protected abstract void UpdateRender();
+        public abstract void Init();
 
         #region GET
         public int Get()
@@ -51,23 +52,23 @@ namespace Assets.Scripts.Models
         {
             Value += value;
             UpdateRender();
-            if (Value < 0) Log.Error("Stat", "_tag: " + _tag, "Value after change is below 0!");
+            if (Value < 0) Log.Error("Stat", "Tag: " + Tag, "Value after change is below 0!");
         }
 
         public void ChangeMin(int value)
         {
             Min += value;
             UpdateRender();
-            if (Min < 0) Log.Error("Stat", "_tag: " + _tag, "Min after change is below 0!");
-            if (Min > Max) Log.Error("Stat", "_tag: " + _tag, "Min after change is more than Max!");
+            if (Min < 0) Log.Error("Stat", "Tag: " + Tag, "Min after change is below 0!");
+            if (Min > Max) Log.Error("Stat", "Tag: " + Tag, "Min after change is more than Max!");
         }
 
         public void ChangeMax(int value)
         {
             Max += value;
             UpdateRender();
-            if (Max < 0) Log.Error("Stat", "_tag: " + _tag, "Max after change is below 0!");
-            if (Max < Min) Log.Error("Stat", "_tag: " + _tag, "Max after change is less than Min!");
+            if (Max < 0) Log.Error("Stat", "Tag: " + Tag, "Max after change is below 0!");
+            if (Max < Min) Log.Error("Stat", "Tag: " + Tag, "Max after change is less than Min!");
         }
         #endregion
     }

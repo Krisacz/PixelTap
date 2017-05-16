@@ -8,15 +8,13 @@ namespace Assets.Scripts.Models
         private Slider _slider;
         private Text _text;
 
-        public SliderCounter(int value, int min, int max, string tag) : base(value, min, max, tag)
-        {
-            
-        }
+        public SliderCounter(int value, int min, int max, string tag) : base(value, min, max, tag) { }
 
-        public void Start()
+        public override void Init()
         {
-            _slider = GameObject.FindGameObjectWithTag(tag).GetComponentInChildren<Slider>();
-            _text = GameObject.FindGameObjectWithTag(tag).GetComponentInChildren<Text>();
+            _slider = GameObject.FindGameObjectWithTag(Tag).GetComponentInChildren<Slider>();
+            _text = GameObject.FindGameObjectWithTag(Tag).GetComponentInChildren<Text>();
+            UpdateRender();
         }
 
         protected sealed override void UpdateRender()

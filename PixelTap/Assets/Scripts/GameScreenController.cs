@@ -9,11 +9,17 @@ namespace Assets.Scripts
 {
     public class GameScreenController : MonoBehaviour
     {
-        public void Update()
+        public GameScreenController Inst;
+
+        public void Start()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) CameraController.MoveToGameScreen(GameScreen.PixelBuilder);
-            if (Input.GetKeyDown(KeyCode.Alpha2)) CameraController.MoveToGameScreen(GameScreen.PixelCluster);
-            if (Input.GetKeyDown(KeyCode.Alpha3)) CameraController.MoveToGameScreen(GameScreen.HQView);
+            Inst = this;
+        }
+
+        public void MoveToScreen(GameScreen gameScreen)
+        {
+            UIController.Inst.ButtonsRender(false);
+            CameraController.MoveToGameScreen(gameScreen);
         }
     }
 }

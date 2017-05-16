@@ -7,6 +7,7 @@ namespace Assets.Scripts
 {
     public class PixelBuilderController : MonoBehaviour
     {
+        public bool IsActive = false;
         public bool IsBuildRandom = true;
         public GameObject BuildPixelPrefab;
 
@@ -23,10 +24,10 @@ namespace Assets.Scripts
         void Update ()
         {
             //Make sure we are in the correct GameScreen
-            //TODO if(GameController.ActiveGameScreen != GameScreen.PixelBuilder) return;
+            if (IsActive == false) return;
 
             //Prevent update if build/morph was completed
-            if(_morphCompleted) return;
+            if (_morphCompleted) return;
 
             //Construct pixel-by-pixel
             if (IsBuildRandom)

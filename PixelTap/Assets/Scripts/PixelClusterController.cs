@@ -6,6 +6,8 @@ namespace Assets.Scripts
 {
     public class PixelClusterController : MonoBehaviour
     {
+        public bool IsActive = false;
+
         public GameObject BixelPrefab;
 
         public Color[] ColorSet1;
@@ -54,7 +56,7 @@ namespace Assets.Scripts
         void Update()
         {
             //Make sure we are in the correct GameScreen
-            if (GameController.ActiveGameScreen != GameScreen.PixelCluster) return;
+            if (IsActive == false) return;
             if(_bits.Count <= 0) return;
             if (!Inpt.Down()) return;
 

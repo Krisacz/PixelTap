@@ -3,9 +3,17 @@
     public enum GameScreen
     {
         None,
-        PixelBuilder,
-        PixelCluster,
+
         HQView,
+        Generator,
+        Workshop,
         HQUpgradeView,
+        Lab,
+
+        Portal,
+        Artifact,
+        PixelCluster1,
+        PixelCluster2,
+        PixelCluster3,
     }
 }
