@@ -115,7 +115,7 @@ public class UIController : MonoBehaviour
                 ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
                 break;
 
-            case GameScreen.HQUpgradeView:
+            case GameScreen.HQUpgrade:
                 ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
                 break;
                 

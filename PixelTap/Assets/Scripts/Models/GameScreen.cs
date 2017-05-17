@@ -7,7 +7,7 @@
         HQView,
         Generator,
         Workshop,
-        HQUpgradeView,
+        HQUpgrade,
         Lab,
 
         Portal,
