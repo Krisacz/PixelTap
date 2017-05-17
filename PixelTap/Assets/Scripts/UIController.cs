@@ -96,7 +96,7 @@ public class UIController : MonoBehaviour
     #endregion
 
     #region ACTIVATE
-    public void ActivateGameScreenUI(GameScreen gameScreen)
+    public void ButtonsActivate(GameScreen gameScreen)
     {
         switch (gameScreen)
         {
@@ -104,43 +104,53 @@ public class UIController : MonoBehaviour
                 break;
 
             case GameScreen.HQView:
-                ButtonsSetActive(false, true, true, true, true, true, true, true, true, true);
+                //ButtonsSetActive(false, true, true, true, true, true, true, true, true, true);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.Generator:
-                ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                //ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.Workshop:
-                ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                //ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.HQUpgrade:
-                ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                //ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
                 
             case GameScreen.Lab:
-                ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                //ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.Portal:
-                ButtonsSetActive(true, false, false, false, false, false, true, true, true, true);
+                //ButtonsSetActive(true, false, false, false, false, false, true, true, true, true);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.Artifact:
-                ButtonsSetActive(true, false, false, false, false, true, false, true, true, true);
+                //ButtonsSetActive(true, false, false, false, false, true, false, true, true, true);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.PixelCluster1:
-                ButtonsSetActive(true, false, false, false, false, false, false, false, true, true);
+                //ButtonsSetActive(true, false, false, false, false, false, false, false, true, true);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.PixelCluster2:
-                ButtonsSetActive(true, false, false, false, false, false, false, true, false, true);
+                //ButtonsSetActive(true, false, false, false, false, false, false, true, false, true);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             case GameScreen.PixelCluster3:
-                ButtonsSetActive(true, false, false, false, false, false, false, true, true, false);
+                //ButtonsSetActive(true, false, false, false, false, false, false, true, true, false);
+                ButtonsSetActive(true, true, true, true, true, true, true, true, true, true);
                 break;
 
             default: throw new ArgumentOutOfRangeException("gameScreen", gameScreen, null);

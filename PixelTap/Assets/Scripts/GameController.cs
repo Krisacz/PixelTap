@@ -7,6 +7,6 @@ namespace Assets.Scripts
 {
     public class GameController : MonoBehaviour
     {
-        public static GameScreen ActiveGameScreen = GameScreen.None;
+        public static GameScreen ActiveGameScreen = GameScreen.Portal;
     }
 }

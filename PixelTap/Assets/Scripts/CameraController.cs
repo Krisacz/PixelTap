@@ -44,7 +44,8 @@ namespace Assets.Scripts
 
         public void OnCameraMoveCompleted()
         {
-            UIController.Inst.ActivateGameScreenUI(_movingTo);
+            UIController.Inst.ButtonsActivate(_movingTo);
+            UIController.Inst.ButtonsRender(true);
             GameController.ActiveGameScreen = _movingTo;
         }
     }
