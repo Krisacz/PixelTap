@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    [Serializable]
     public class GameScreenController : MonoBehaviour
     {
-        public GameScreenController Inst;
+        public static GameScreenController Inst;
+        public static GameScreen ActiveGameScreen = GameScreen.HQView;
 
         public void Start()
         {

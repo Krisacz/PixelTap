@@ -2,6 +2,9 @@
 {
     public enum Tags
     {
+        //Camera
+        CameraTweenMover,
+
         //Game Screens
         GameScreen_PixelBuilder,
         GameScreen_PixelCluster,

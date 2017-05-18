@@ -9,13 +9,21 @@ namespace Assets.Scripts
     {
         private static GameScreen _movingTo = GameScreen.None;
 
+        public static void SetToGameScreen(GameScreen gameScreen)
+        {
+            var tag = string.Format("GameScreen_{0}", gameScreen);
+            var gameScreenGo = GameObject.FindGameObjectWithTag(tag);
+            var position = gameScreenGo.transform.position;
+            Camera.main.transform.position = position;
+        }
+
         public static void MoveToGameScreen(GameScreen moveTo)
         {
             //Prevent moving from current screent to same screen
-            if(GameController.ActiveGameScreen == moveTo) return;
+            if(GameScreenController.ActiveGameScreen == moveTo) return;
 
             //From Game Screen
-            var fromTag = string.Format("GameScreen_{0}", GameController.ActiveGameScreen);
+            var fromTag = string.Format("GameScreen_{0}", GameScreenController.ActiveGameScreen);
             var fromGameScreen = GameObject.FindGameObjectWithTag(fromTag);
             var fromPos = fromGameScreen.transform.position;
 
@@ -30,13 +38,13 @@ namespace Assets.Scripts
 
             //Set vars
             _movingTo = moveTo;
-            GameController.ActiveGameScreen = GameScreen.None;
+            GameScreenController.ActiveGameScreen = GameScreen.None;
 
             //Tween
             //TODO: Picked ease types: easeOutQuad, easeInCubic, easeOutQuart, easeOutQuint, easeOutExpo, easeInOutExpo, spring,
             var parms = new Hashtable();
             parms.Add("path", path);
-            parms.Add("easeType", "easeInOutExpo");
+            parms.Add("easeType", EaseType.easeInOutExpo.ToString());
             parms.Add("oncomplete", "OnCameraMoveCompleted");
             parms.Add("time", 1f);
             iTween.MoveTo(Camera.main.gameObject, parms);
@@ -46,7 +54,7 @@ namespace Assets.Scripts
         {
             UIController.Inst.ButtonsActivate(_movingTo);
             UIController.Inst.ButtonsRender(true);
-            GameController.ActiveGameScreen = _movingTo;
+            GameScreenController.ActiveGameScreen = _movingTo;
         }
     }
 }

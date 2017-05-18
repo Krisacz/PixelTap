@@ -1,26 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Models;
 using UnityEngine;
 
-public class SectorController : MonoBehaviour
+namespace Assets.Scripts
 {
-    public static SectorController Inst;
-    
-    public bool PixelCluster1 { get; private set; }
-    
-	void Start ()
-	{
-	    Inst = this;
-	}
-
-    public void Init()
+    public class SectorController : MonoBehaviour
     {
-        
+        public static SectorController Inst;
+        private SectorInfo _sectorInfo;
+
+        public void OnEnable()
+        {
+            GenerateSector();
+        }
+
+        public void Start ()
+        {
+            Inst = this;
+        }
+
+        private void GenerateSector()
+        {
+            //_sectorInfo = new SectorInfo(false, false, false, false, false, false, false, false, false, false);
+            //_sectorInfo = new SectorInfo(true, true, true, false, true, true, true, true, false, false);
+
+            _sectorInfo = new SectorInfo(true, true, true, true, true, true, true, true, true, true);
+            CameraController.SetToGameScreen(GameScreen.HQView);
+        }
+
+        public SectorInfo GetSectorInfo()
+        {
+            return _sectorInfo;
+        }
     }
-
-}
-
-public class SectorInfo
-{
-    
 }

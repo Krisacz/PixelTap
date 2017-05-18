@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DebugController : MonoBehaviour
+namespace Assets.Scripts
 {
-    private bool _flag = true;
-
-    void Update ()
+    public class DebugController : MonoBehaviour
     {
-	    if (Input.GetKeyDown(KeyCode.Return))
-	    {
-	        UIController.Inst.ButtonsRender(_flag);
-	        _flag = !_flag;
-	    }
-	}
+        public void OnGUI()
+        {
+            GUI.color = Color.red;
+            GUI.Label(new Rect(10, 30, 100, 100), GameScreenController.ActiveGameScreen.ToString());
+        }
+    }
 }
