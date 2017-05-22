@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Models
 {
+    [Serializable]
     public class SliderCounter : Stat
     {
         private Slider _slider;

@@ -99,50 +99,50 @@ namespace Assets.Scripts
         #endregion
 
         #region ACTIVATE
-        public void ButtonsActivate(GameScreen gameScreen)
+        public void ButtonsActivate(GameScreenType gameScreen)
         {
             switch (gameScreen)
             {
-                case GameScreen.None:
+                case GameScreenType.None:
                     break;
 
-                case GameScreen.HQView:
+                case GameScreenType.HQView:
                     ButtonsSetActive(false, true, true, true, true, true, true, true, true, true);
                     break;
 
-                case GameScreen.Generator:
+                case GameScreenType.Generator:
                     ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
                     break;
 
-                case GameScreen.Workshop:
+                case GameScreenType.Workshop:
                     ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
                     break;
 
-                case GameScreen.HQUpgrade:
+                case GameScreenType.HQUpgrade:
                     ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
                     break;
                 
-                case GameScreen.Lab:
+                case GameScreenType.Lab:
                     ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
                     break;
 
-                case GameScreen.Portal:
+                case GameScreenType.Portal:
                     ButtonsSetActive(true, false, false, false, false, false, true, true, true, true);
                     break;
 
-                case GameScreen.Artifact:
+                case GameScreenType.Artifact:
                     ButtonsSetActive(true, false, false, false, false, true, false, true, true, true);
                     break;
 
-                case GameScreen.PixelCluster1:
+                case GameScreenType.PixelCluster1:
                     ButtonsSetActive(true, false, false, false, false, true, true, false, true, true);
                     break;
 
-                case GameScreen.PixelCluster2:
+                case GameScreenType.PixelCluster2:
                     ButtonsSetActive(true, false, false, false, false, true, true, true, false, true);
                     break;
 
-                case GameScreen.PixelCluster3:
+                case GameScreenType.PixelCluster3:
                     ButtonsSetActive(true, false, false, false, false, true, true, true, true, false);
                     break;
 

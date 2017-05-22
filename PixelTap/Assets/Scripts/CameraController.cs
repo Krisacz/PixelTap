@@ -7,9 +7,9 @@ namespace Assets.Scripts
 {
     public class CameraController: MonoBehaviour
     {
-        private static GameScreen _movingTo = GameScreen.None;
+        private static GameScreenType _movingTo = GameScreenType.None;
 
-        public static void SetToGameScreen(GameScreen gameScreen)
+        public static void SetToGameScreen(GameScreenType gameScreen)
         {
             var tag = string.Format("GameScreen_{0}", gameScreen);
             var gameScreenGo = GameObject.FindGameObjectWithTag(tag);
@@ -17,7 +17,7 @@ namespace Assets.Scripts
             Camera.main.transform.position = position;
         }
 
-        public static void MoveToGameScreen(GameScreen moveTo)
+        public static void MoveToGameScreen(GameScreenType moveTo)
         {
             //Prevent moving from current screent to same screen
             if(GameScreenController.ActiveGameScreen == moveTo) return;
@@ -38,8 +38,8 @@ namespace Assets.Scripts
 
             //Set vars
             _movingTo = moveTo;
-            GameScreenController.ActiveGameScreen = GameScreen.None;
-
+            GameScreenController.ActiveGameScreen = GameScreenType.None;
+                
             //Tween
             //TODO: Picked ease types: easeOutQuad, easeInCubic, easeOutQuart, easeOutQuint, easeOutExpo, easeInOutExpo, spring,
             var parms = new Hashtable();

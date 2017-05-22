@@ -1,5 +1,8 @@
-namespace Assets.Scripts.Models
+using System;
+
+namespace Assets.Scripts.Models.GData
 {
+    [Serializable]
     public class SectorInfo
     {
         public bool HqView { get; private set; }

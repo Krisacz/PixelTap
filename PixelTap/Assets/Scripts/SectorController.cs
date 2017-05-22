@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Models;
+using Assets.Scripts.Models.GData;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -24,7 +25,7 @@ namespace Assets.Scripts
             //_sectorInfo = new SectorInfo(true, true, true, false, true, true, true, true, false, false);
 
             _sectorInfo = new SectorInfo(true, true, true, true, true, true, true, true, true, true);
-            CameraController.SetToGameScreen(GameScreen.HQView);
+            CameraController.SetToGameScreen(GameScreenType.HQView);
         }
 
         public SectorInfo GetSectorInfo()

@@ -3,7 +3,7 @@
 namespace Assets.Scripts.Models
 {
     [Serializable]
-    public enum GameScreen
+    public enum GameScreenType
     {
         None,
 

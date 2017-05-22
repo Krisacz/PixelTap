@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
+    [Serializable]
     public abstract class Stat : Behaviour
     {
         internal int Value;
