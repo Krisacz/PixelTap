@@ -10,7 +10,7 @@ namespace Assets.Scripts.Models
         private Slider _slider;
         private Text _text;
 
-        public SliderCounter(int value, int min, int max, string tag) : base(value, min, max, tag) { }
+        public SliderCounter(int value, int max, string tag) : base(value, max, tag) { }
 
         public override void Init()
         {

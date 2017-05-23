@@ -11,10 +11,10 @@ namespace Assets.Scripts.Models
         internal int Max;
         internal readonly string Tag;
 
-        protected Stat(int value, int min, int max, string tag)
+        protected Stat(int value, int max, string tag)
         {
             Value = value;
-            Min = min;
+            Min = 0;
             Max = max;
             Tag = tag;
         }

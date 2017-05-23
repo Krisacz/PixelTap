@@ -9,21 +9,29 @@ namespace Assets.Scripts
     {
         private static GameScreenType _movingTo = GameScreenType.None;
 
-        public static void SetToGameScreen(GameScreenType gameScreen)
+        private static void SetToGameScreen(GameScreenType gameScreen)
         {
             var tag = string.Format("GameScreen_{0}", gameScreen);
             var gameScreenGo = GameObject.FindGameObjectWithTag(tag);
-            var position = gameScreenGo.transform.position;
+            var gsPos = gameScreenGo.transform.position;
+            var position = new Vector3(gsPos.x, gsPos.y, -10f);
             Camera.main.transform.position = position;
         }
 
-        public static void MoveToGameScreen(GameScreenType moveTo)
+        public static void MoveToGameScreen(GameScreenType moveTo, bool instant)
         {
             //Prevent moving from current screent to same screen
-            if(GameScreenController.ActiveGameScreen == moveTo) return;
+            if (GameController.ActiveGameScreen == moveTo) return;
+
+            //If INSTANT flag is on - move instantly
+            if (instant)
+            {
+                SetToGameScreen(moveTo);
+                return;
+            }
 
             //From Game Screen
-            var fromTag = string.Format("GameScreen_{0}", GameScreenController.ActiveGameScreen);
+            var fromTag = string.Format("GameScreen_{0}", GameController.ActiveGameScreen);
             var fromGameScreen = GameObject.FindGameObjectWithTag(fromTag);
             var fromPos = fromGameScreen.transform.position;
 
@@ -38,7 +46,7 @@ namespace Assets.Scripts
 
             //Set vars
             _movingTo = moveTo;
-            GameScreenController.ActiveGameScreen = GameScreenType.None;
+            GameController.ActiveGameScreen = GameScreenType.None;
                 
             //Tween
             //TODO: Picked ease types: easeOutQuad, easeInCubic, easeOutQuart, easeOutQuint, easeOutExpo, easeInOutExpo, spring,
@@ -52,9 +60,9 @@ namespace Assets.Scripts
 
         public void OnCameraMoveCompleted()
         {
-            UIController.Inst.ButtonsActivate(_movingTo);
-            UIController.Inst.ButtonsRender(true);
-            GameScreenController.ActiveGameScreen = _movingTo;
+            UIController.Inst.ButtonsEnable(_movingTo);
+            UIController.Inst.ButtonsShowHide(true);
+            GameController.ActiveGameScreen = _movingTo;
         }
     }
 }

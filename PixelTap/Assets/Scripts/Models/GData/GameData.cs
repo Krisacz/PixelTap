@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Assets.Scripts.Models.GData
 {
@@ -7,7 +6,7 @@ namespace Assets.Scripts.Models.GData
     public class GameData
     {
         public StatsData StatsData;
-        public GameScreenType LastCameraPosition;
+        public GameScreenType ActiveGameScreen;
         public SectorData SectorData; //TODO Potentially convert it to array of sector data object to describe whole "universe"
         
         public GameData SetDefaults()
@@ -16,7 +15,7 @@ namespace Assets.Scripts.Models.GData
             StatsData = new StatsData();
 
             //Last Cam Position
-            LastCameraPosition = GameScreenType.None;
+            ActiveGameScreen = GameScreenType.HQView; //TODO default to NONE? 
 
             //Sector Data
             SectorData = new SectorData();

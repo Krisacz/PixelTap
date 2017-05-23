@@ -5,19 +5,26 @@ namespace Assets.Scripts.Models.GData
     [Serializable]
     public class StatsData
     {
-        public Stat BuildPixels;
-        public Stat TechPixels;
-        public Stat SolvePixels;
-        public Stat RawPixels;
-        public Stat Energy;
+        public StatData BuildPixels;
+        public StatData TechPixels;
+        public StatData SolvePixels;
+        public StatData RawPixels;
+        public StatData Energy;
 
         public StatsData()
         {
-            BuildPixels = new Counter(100, 0, int.MaxValue, Tags.Counter_BuildPixels.ToString());
-            TechPixels = new Counter(100, 0, int.MaxValue, Tags.Counter_TechPixels.ToString());
-            SolvePixels = new Counter(100, 0, int.MaxValue, Tags.Counter_SolvePixels.ToString());
-            RawPixels = new Counter(100, 0, int.MaxValue, Tags.Counter_RawPixels.ToString());
-            Energy = new SliderCounter(0, 0, 100, Tags.Counter_Energy.ToString());
+            BuildPixels = new StatData() {  Current = 100,  Max = int.MaxValue };
+            TechPixels = new StatData()  {  Current = 100,  Max = int.MaxValue };
+            SolvePixels = new StatData() {  Current = 100,  Max = int.MaxValue };
+            RawPixels = new StatData()   {  Current = 100,  Max = int.MaxValue };
+            Energy = new StatData()      {  Current = 50,   Max = 100 };
         }
+    }
+
+    [Serializable]
+    public class StatData
+    {
+        public int Current;
+        public int Max;
     }
 }

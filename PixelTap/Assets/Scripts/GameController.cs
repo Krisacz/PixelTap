@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Assets.Scripts.GameScreens;
 using Assets.Scripts.Models;
 using Assets.Scripts.Models.GData;
 using UnityEngine;
@@ -10,43 +7,66 @@ namespace Assets.Scripts
 {
     public class GameController : MonoBehaviour
     {
-        public GameObject GameScreensHolder;
+        public static GameScreenType ActiveGameScreen = GameScreenType.None;
 
-        public GameObject HqView;
-        public GameObject Generator;
-        public GameObject Workshop;
-        public GameObject HqUpgrade;
-        public GameObject Lab;
-
-        public GameObject Portal;
-        public GameObject Artifact;
-        public GameObject PixelCluster1;
-        public GameObject PixelCluster2;
-        public GameObject PixelCluster3;
-
-
-        public void OnEnable()
+        public void Start()
         {
-            //GameSave.Reset();
-
             //===== GAME START =====
+            //===== GAME START =====
+            //===== GAME START =====
+
+            //----- LOAD DATA -----
             GameSave.Load();
             var gameData = GameSave.Get();
+            ActiveGameScreen = gameData.ActiveGameScreen;
 
-            //TODO Create & init basic screens
-            //TODO Create & init all optional screens (conditional if they are in game data)
-            //TODO Position camera
-            //TODO Load and init stats
-            //TODO Update current UI
+            //----- SET ALL STATISTICS -----
+            StatsController.Inst.Init(gameData.StatsData);
+
+            //----- INITIALIZE SCREENS -----
+            InitGameScreens(gameData.SectorData);
+
+            //----- POSITION CAMERA -----
+            CameraController.MoveToGameScreen(gameData.ActiveGameScreen, true);
+            
+            //----- UPDATE UI VIEW -----
+            UIController.Inst.ButtonsEnable(ActiveGameScreen);
         }
 
-        private void InitGameScreens(GameData gameData)
+        #region INIT GAME SCREENS
+        private static void InitGameScreens(SectorData sectorData)
         {
-            var offset = Vector2.zero;
+            HqViewController.Inst.Init(sectorData.HqViewData);
+            HqViewController.Inst.SetEnabled();
 
-            Instantiate(HqView, offset, Quaternion.identity).GetComponent<GameScreen>().Init();
-            Instantiate(Generator, offset, Quaternion.identity).GetComponent<GameScreen>().Init();
-            //TODO.......
+            GeneratorController.Inst.Init(sectorData.GeneratorData);
+            GeneratorController.Inst.SetEnabled();
+
+            WorkshopController.Inst.Init(sectorData.WorkshopData);
+            WorkshopController.Inst.SetEnabled();
+
+            HqUpgradeController.Inst.Init(sectorData.HqUpgradeData);
+            HqUpgradeController.Inst.SetEnabled();
+
+            LabController.Inst.Init(sectorData.LabData);
+            LabController.Inst.SetEnabled();
+            
+            PortalController.Inst.Init(sectorData.PortalData);
+            PortalController.Inst.SetEnabled();
+
+            ArtifactController.Inst.Init(sectorData.ArtifactData);
+            ArtifactController.Inst.SetEnabled();
+
+            PixelClusterAlphaController.Inst.Init(sectorData.PixelClusterAlpha);
+            PixelClusterAlphaController.Inst.SetEnabled();
+
+            PixelClusterBetaController.Inst.Init(sectorData.PixelClusterBeta);
+            PixelClusterBetaController.Inst.SetEnabled();
+
+            PixelClusterGammaController.Inst.Init(sectorData.PixelClusterGamma);
+            PixelClusterGammaController.Inst.SetEnabled();
+
         }
+        #endregion
     }
 }

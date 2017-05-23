@@ -9,7 +9,7 @@ namespace Assets.Scripts.Models
     {
         private Text _text;
 
-        public Counter(int value, int min, int max, string tag) : base(value, min, max, tag) { }
+        public Counter(int value, int max, string tag) : base(value, max, tag) { }
 
         public override void Init()
         {

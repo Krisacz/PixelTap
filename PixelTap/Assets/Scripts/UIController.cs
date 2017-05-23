@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Assets.Scripts.GameScreens;
 using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,43 +27,43 @@ namespace Assets.Scripts
         {
             Inst = this;
 
+            #region COLLECT GO'S FROM TAGS
             _hqViewButton = GameObject.FindWithTag(Tags.HQView_Button.ToString());
             _generatorButton = GameObject.FindWithTag(Tags.Generator_Button.ToString());
             _workshopButton = GameObject.FindWithTag(Tags.Workshop_Button.ToString());
             _hqUpgradeButton = GameObject.FindWithTag(Tags.HQUpgrade_Button.ToString());
             _labButton = GameObject.FindWithTag(Tags.Lab_Button.ToString());
-        
+
             _portalButton = GameObject.FindWithTag(Tags.Portal_Button.ToString());
             _artifactButton = GameObject.FindWithTag(Tags.Artifact_Button.ToString());
             _pixelCluster1Button = GameObject.FindWithTag(Tags.PixelCluster1_Button.ToString());
             _pixelCluster2Button = GameObject.FindWithTag(Tags.PixelCluster2_Button.ToString());
             _pixelCluster3Button = GameObject.FindWithTag(Tags.PixelCluster3_Button.ToString());
-
-            ButtonsActivate(GameScreenController.ActiveGameScreen);
+            #endregion
         }
 
-        #region HIDE ALL
+        #region BUTTONS SHOW/HIDE
         private const float StartDelay = 0.1f;
         private const float DiffDelay = 0.1f;
         private static float _delay;
-        public void ButtonsRender(bool show)
+        public void ButtonsShowHide(bool show)
         {
             _delay = StartDelay;
-            HideShow(_portalButton, show);
-            HideShow(_artifactButton, show);
-            HideShow(_pixelCluster1Button, show);
-            HideShow(_pixelCluster2Button, show);
-            HideShow(_pixelCluster3Button, show);
+            ButtonShowHide(_portalButton, show);
+            ButtonShowHide(_artifactButton, show);
+            ButtonShowHide(_pixelCluster1Button, show);
+            ButtonShowHide(_pixelCluster2Button, show);
+            ButtonShowHide(_pixelCluster3Button, show);
 
             _delay = StartDelay;
-            HideShow(_hqViewButton, show);
-            HideShow(_generatorButton, show);
-            HideShow(_workshopButton, show);
-            HideShow(_hqUpgradeButton, show);
-            HideShow(_labButton, show);
+            ButtonShowHide(_hqViewButton, show);
+            ButtonShowHide(_generatorButton, show);
+            ButtonShowHide(_workshopButton, show);
+            ButtonShowHide(_hqUpgradeButton, show);
+            ButtonShowHide(_labButton, show);
         }
 
-        private static void HideShow(GameObject go, bool show)
+        private static void ButtonShowHide(GameObject go, bool show)
         {
             //Bail out if not active
             if(!go.activeSelf) return;
@@ -98,8 +99,8 @@ namespace Assets.Scripts
         }
         #endregion
 
-        #region ACTIVATE
-        public void ButtonsActivate(GameScreenType gameScreen)
+        #region BUTTONS ACTIVATE
+        public void ButtonsEnable(GameScreenType gameScreen)
         {
             switch (gameScreen)
             {
@@ -107,67 +108,63 @@ namespace Assets.Scripts
                     break;
 
                 case GameScreenType.HQView:
-                    ButtonsSetActive(false, true, true, true, true, true, true, true, true, true);
+                    ButtonEnable(HqViewController.Inst.GetButtonsVisibility());
                     break;
 
                 case GameScreenType.Generator:
-                    ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                    ButtonEnable(GeneratorController.Inst.GetButtonsVisibility());
                     break;
 
                 case GameScreenType.Workshop:
-                    ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                    ButtonEnable(HqViewController.Inst.GetButtonsVisibility());
                     break;
 
                 case GameScreenType.HQUpgrade:
-                    ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                    ButtonEnable(WorkshopController.Inst.GetButtonsVisibility());
                     break;
                 
                 case GameScreenType.Lab:
-                    ButtonsSetActive(true, false, false, false, false, false, false, false, false, false);
+                    ButtonEnable(LabController.Inst.GetButtonsVisibility());
                     break;
 
                 case GameScreenType.Portal:
-                    ButtonsSetActive(true, false, false, false, false, false, true, true, true, true);
+                    ButtonEnable(PortalController.Inst.GetButtonsVisibility());
                     break;
 
                 case GameScreenType.Artifact:
-                    ButtonsSetActive(true, false, false, false, false, true, false, true, true, true);
+                    ButtonEnable(ArtifactController.Inst.GetButtonsVisibility());
                     break;
 
-                case GameScreenType.PixelCluster1:
-                    ButtonsSetActive(true, false, false, false, false, true, true, false, true, true);
+                case GameScreenType.PixelClusterAlpha:
+                    ButtonEnable(PixelClusterAlphaController.Inst.GetButtonsVisibility());
                     break;
 
-                case GameScreenType.PixelCluster2:
-                    ButtonsSetActive(true, false, false, false, false, true, true, true, false, true);
+                case GameScreenType.PixelClusterBeta:
+                    ButtonEnable(PixelClusterBetaController.Inst.GetButtonsVisibility());
                     break;
 
-                case GameScreenType.PixelCluster3:
-                    ButtonsSetActive(true, false, false, false, false, true, true, true, true, false);
+                case GameScreenType.PixelClusterGamma:
+                    ButtonEnable(PixelClusterGammaController.Inst.GetButtonsVisibility());
                     break;
 
                 default: throw new ArgumentOutOfRangeException("gameScreen", gameScreen, null);
             }
         }
 
-        private void ButtonsSetActive(bool hqView, bool gen, bool workshop, bool hqUpgrade, bool lab,
-            bool portal, bool artifact, bool pc1, bool pc2, bool pc3)
+        private void ButtonEnable(ButtonsVisibility bs)
         {
-            var sectorInfo = SectorController.Inst.GetSectorInfo();
+            _hqViewButton.SetActive(        HqViewController.Inst.IsEnabled             && bs.HQView);
+            _generatorButton.SetActive(     GeneratorController.Inst.IsEnabled          && bs.Generator);
+            _workshopButton.SetActive(      WorkshopController.Inst.IsEnabled           && bs.Workshop);
+            _hqUpgradeButton.SetActive(     HqUpgradeController.Inst.IsEnabled          && bs.HQUpgrade);
+            _labButton.SetActive(           LabController.Inst.IsEnabled                && bs.Lab);
 
-            _hqViewButton.SetActive(hqView && sectorInfo.HqView);
-            _generatorButton.SetActive(gen && sectorInfo.Generator);
-            _workshopButton.SetActive(workshop && sectorInfo.Workshop);
-            _hqUpgradeButton.SetActive(hqUpgrade && sectorInfo.HqUpgrade);
-            _labButton.SetActive(lab && sectorInfo.Lab);
-
-            _portalButton.SetActive(portal && sectorInfo.Portal);
-            _artifactButton.SetActive(artifact && sectorInfo.Artifact);
-            _pixelCluster1Button.SetActive(pc1 && sectorInfo.PixelCluster1);
-            _pixelCluster2Button.SetActive(pc2 && sectorInfo.PixelCluster2);
-            _pixelCluster3Button.SetActive(pc3 && sectorInfo.PixelCluster3);
+            _portalButton.SetActive(        PortalController.Inst.IsEnabled             && bs.Portal);
+            _artifactButton.SetActive(      ArtifactController.Inst.IsEnabled           && bs.Artifact);
+            _pixelCluster1Button.SetActive( PixelClusterAlphaController.Inst.IsEnabled  && bs.PixelCluster1);
+            _pixelCluster2Button.SetActive( PixelClusterBetaController.Inst.IsEnabled   && bs.PixelCluster2);
+            _pixelCluster3Button.SetActive( PixelClusterGammaController.Inst.IsEnabled  && bs.PixelCluster3);
         }
-
         #endregion
     }
 }

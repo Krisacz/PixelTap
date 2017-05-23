@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Assets.Scripts.Models.GData
 {
     [Serializable]
-    public class PixelClusterData
+    public class PixelClusterData : IGameScreenData
     {
         public PixelClusterType Type;
         public PixelClusterSize Size;
@@ -18,5 +18,7 @@ namespace Assets.Scripts.Models.GData
             Pixels = new List<PixelData>();
             Rotation = 0f;
         }
+
+        public bool Enabled { get; set; }
     }
 }

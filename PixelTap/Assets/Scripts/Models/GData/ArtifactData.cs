@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Assets.Scripts.Models.GData
 {
     [Serializable]
-    public class ArtifactData
+    public class ArtifactData : IGameScreenData
     {
         public ArtifactType Type;
         public ArtifactSize Size;
@@ -18,5 +18,7 @@ namespace Assets.Scripts.Models.GData
             Pixels = new List<PixelData>();
             Rotation = 0f;
         }
+
+        public bool Enabled { get; set; }
     }
 }

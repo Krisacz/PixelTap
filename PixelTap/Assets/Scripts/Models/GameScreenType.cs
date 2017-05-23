@@ -15,8 +15,8 @@ namespace Assets.Scripts.Models
 
         Portal,
         Artifact,
-        PixelCluster1,
-        PixelCluster2,
-        PixelCluster3,
+        PixelClusterAlpha,
+        PixelClusterBeta,
+        PixelClusterGamma,
     }
 }

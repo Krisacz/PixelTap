@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Assets.Scripts.Models.GData
 {
     [Serializable]
-    public class PortalData
+    public class PortalData : IGameScreenData
     {
         public List<DeadPixel> DeadPixels;
         public bool Encrypted;
@@ -14,5 +14,7 @@ namespace Assets.Scripts.Models.GData
             DeadPixels = new List<DeadPixel>();
             Encrypted = false;
         }
+
+        public bool Enabled { get; set; }
     }
 }
